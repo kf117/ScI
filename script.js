@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjeta.className = "tarjeta";
     tarjeta.id = `producto-${prod.id}`;
     tarjeta.innerHTML = `
-      <h3>${prod.nombre}</h3>
+      <input class="valor" id="nombre-${prod.id}" value="${prod.nombre}" />
+	  <button onclick="eliminarProducto(${prod.id})" style="margin-top: 10px; background: #f44336; color: black; border: none; padding: 5px 10px; border-radius: 4px;">🗑️ Borrar</button>
       <p>${prod.descripcion}</p>
       <div class="controles">
         <div class="fila-controles">
@@ -39,6 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     contenedor.appendChild(tarjeta);
   }
+
+
+window.eliminarProducto = (id) => {
+  productos = productos.filter(p => p.id !== id);
+  const tarjeta = document.getElementById(`producto-${id}`);
+  if (tarjeta) tarjeta.remove();
+};
+
 
   function crearBloqueMateria(m) {
     const bloque = document.createElement("div");
@@ -115,6 +124,32 @@ document.addEventListener("DOMContentLoaded", () => {
       materiasPanel.innerHTML = "";
 
       productos.forEach(p => crearTarjetaProducto(p));
+	  
+	  const nuevaTarjeta = document.createElement("div");
+		nuevaTarjeta.className = "tarjeta";
+		nuevaTarjeta.innerHTML = `
+		  <h3>Nuevo producto</h3>
+		  <input id="nuevo-nombre" placeholder="Nombre" class="valor" />
+		  <input id="nuevo-desc" placeholder="Descripción" class="valor" />
+		  <input id="nuevo-stock" placeholder="Stock" type="number" class="valor" />
+		  <button id="crear-producto">Crear</button>
+		`;
+		contenedor.appendChild(nuevaTarjeta);
+
+		document.getElementById("crear-producto").addEventListener("click", () => {
+		  const nombre = document.getElementById("nuevo-nombre").value.trim();
+		  const descripcion = document.getElementById("nuevo-desc").value.trim();
+		  const stock = parseInt(document.getElementById("nuevo-stock").value, 10);
+
+		  if (!nombre || isNaN(stock)) return alert("Faltan datos");
+
+		  const id = Date.now();
+		  const nuevo = { id, nombre, descripcion, disponible: stock, pedido: 0 };
+		  productos.push(nuevo);
+		  crearTarjetaProducto(nuevo);
+		});
+
+	  
       materiasPrimas.forEach(m => crearBloqueMateria(m));
 
     } catch (err) {
@@ -161,6 +196,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   productos.forEach(p => crearTarjetaProducto(p));
+  
+  const nuevaTarjeta = document.createElement("div");
+nuevaTarjeta.className = "tarjeta";
+nuevaTarjeta.innerHTML = `
+  <h3>Nuevo producto</h3>
+  <input id="nuevo-nombre" placeholder="Nombre" class="valor" />
+  <input id="nuevo-desc" placeholder="Descripción" class="valor" />
+  <input id="nuevo-stock" placeholder="Stock" type="number" class="valor" />
+  <button id="crear-producto">Crear</button>
+`;
+contenedor.appendChild(nuevaTarjeta);
+
+document.getElementById("crear-producto").addEventListener("click", () => {
+  const nombre = document.getElementById("nuevo-nombre").value.trim();
+  const descripcion = document.getElementById("nuevo-desc").value.trim();
+  const stock = parseInt(document.getElementById("nuevo-stock").value, 10);
+
+  if (!nombre || isNaN(stock)) return alert("Faltan datos");
+
+  const id = Date.now();
+  const nuevo = { id, nombre, descripcion, disponible: stock, pedido: 0 };
+  productos.push(nuevo);
+  crearTarjetaProducto(nuevo);
+});
+
+  
   materiasPrimas.forEach(m => crearBloqueMateria(m));
 
   window.cambiarMateria = (id, delta) => {
