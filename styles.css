@@ -1,0 +1,159 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #4CAF50;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contenedor {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.tarjeta h3 {
+  margin-top: 0;
+}
+
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.fila-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.fila-controles label {
+  font-weight: bold;
+}
+
+.fila-controles .grupo {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.controles button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #eee;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controles button:hover {
+  background-color: #ddd;
+}
+
+.resultado {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.resumen {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  text-align: right;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+#cerrar-todos {
+  margin-top: 10px;
+  padding: 8px 15px;
+  font-weight: bold;
+  border: none;
+  background: #ff5722;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#cerrar-todos:hover {
+  background: #e64a19;
+}
+
+span.valor {
+  font-weight: bold;
+  color: #333;
+}
+
+
+.materias-panel {
+  margin-top: 40px;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.materia {
+  flex: 0 0 auto;
+  min-width: 150px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.materia h4 {
+  margin: 0 0 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.materia .cantidad {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.materia button {
+  padding: 4px 10px;
+  margin: 0 4px;
+  background: #eee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.materia button:hover {
+  background: #ddd;
+}
