@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="grupo">
             <button onclick="sumarExtra(${prod.id}, 1)">+1</button>
             <button onclick="sumarExtra(${prod.id}, 5)">+5</button>
+			<input class="valor" id="total-${prod.id}" value="${prod.disponible}"/>
             <button onclick="sumarExtra(${prod.id}, -1)">-1</button>
 			<button onclick="sumarExtra(${prod.id}, -5)">-5</button>
           </div>
@@ -42,13 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="grupo">
             <button onclick="modificarPedido(${prod.id}, -1)">-1</button>
 			<button onclick="modificarPedido(${prod.id}, -5)">-5</button>
-            <span class="valor" id="pedido-${prod.id}">0</span>
+            <input class="valor" id="pedido-${prod.id}" value="0" />
             <button onclick="modificarPedido(${prod.id}, 1)">+1</button>
-			<button onclick="modificarPedido(${prod.id}, 1)">+5</button>
+			<button onclick="modificarPedido(${prod.id}, 5)">+5</button>
           </div>
-        </div>
-        <div class="resultado">
-          Total disponible: <span class="valor" id="total-${prod.id}">${prod.disponible}</span>
         </div>
       </div>
     `;
@@ -79,18 +77,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const pedido = cantidadesPedido[id];
     const total = Math.max(base + extra - pedido, 0);
 
-    document.getElementById(`pedido-${id}`).textContent = pedido;
-    document.getElementById(`total-${id}`).textContent = total;
+    document.getElementById(`pedido-${id}`).value = pedido;
+    document.getElementById(`total-${id}`).value = total;
 
-   
   }
 
 
   document.getElementById("cerrar-todos").addEventListener("click", () => {
-    productos.forEach(p => {
-      cantidadesPedido[p.id] = 0;
-
-    });
+   productos.forEach(p => {
+	cantidadesPedido[p.id] = 0;
+	    document.getElementById(`pedido-${p.id}`).value = 0;
+	});
   });
 
   productos.forEach(p => actualizar(p.id));

@@ -104,8 +104,8 @@ header {
   background: #e64a19;
 }
 
-span.valor {
-  font-weight: bold;
+.valor {
+  width: 50%;
   color: #333;
 }
 
