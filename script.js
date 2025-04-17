@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjeta.id = `producto-${prod.id}`;
     tarjeta.innerHTML = `
       <input class="valor" id="nombre-${prod.id}" value="${prod.nombre}" />
-	  <button onclick="eliminarProducto(${prod.id})" style="margin-top: 10px; background: #f44336; color: black; border: none; padding: 5px 10px; border-radius: 4px;">🗑️ Borrar</button>
+	  <button onclick="eliminarProducto(${prod.id})" class="btnBorrar">Borrar</button>
       <p>${prod.descripcion}</p>
       <div class="controles">
         <div class="fila-controles">
@@ -102,7 +102,7 @@ window.eliminarProducto = (id) => {
     const data = {
       productos: productos.map(p => ({
         id: p.id,
-        nombre: p.nombre,
+        nombre: document.getElementById(`nombre-${p.id}`).value,
         descripcion: p.descripcion,
         disponible: parseInt(document.getElementById(`total-${p.id}`).value, 10) || 0,
         pedido: parseInt(document.getElementById(`pedido-${p.id}`).value, 10) || 0
@@ -124,6 +124,8 @@ window.eliminarProducto = (id) => {
       materiasPanel.innerHTML = "";
 
       productos.forEach(p => crearTarjetaProducto(p));
+	  
+	  
 	  
 	  const nuevaTarjeta = document.createElement("div");
 		nuevaTarjeta.className = "tarjeta";
@@ -195,7 +197,7 @@ window.eliminarProducto = (id) => {
     ];
   }
 
-  productos.forEach(p => crearTarjetaProducto(p));
+
   
   const nuevaTarjeta = document.createElement("div");
 nuevaTarjeta.className = "tarjeta";
@@ -207,6 +209,8 @@ nuevaTarjeta.innerHTML = `
   <button id="crear-producto">Crear</button>
 `;
 contenedor.appendChild(nuevaTarjeta);
+
+  productos.forEach(p => crearTarjetaProducto(p));
 
 document.getElementById("crear-producto").addEventListener("click", () => {
   const nombre = document.getElementById("nuevo-nombre").value.trim();
@@ -230,4 +234,6 @@ document.getElementById("crear-producto").addEventListener("click", () => {
     materia.cantidad = Math.max(0, materia.cantidad + delta);
     document.getElementById(`materia-${id}`).textContent = materia.cantidad;
   };
+  
+  
 });
