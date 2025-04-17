@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	{ id: 5, nombre: "OG kush", descripcion: "", disponible: 4 },
 	{ id: 10, nombre: "Meth GranDaddyAss", descripcion: "", disponible: 64 },
 	{ id: 11, nombre: "Fruity ghost", descripcion: "", disponible: 10 },
-	{ id: 11, nombre: "Thick Smegma", descripcion: "", disponible: 10}
+	{ id: 12, nombre: "Thick Smegma", descripcion: "", disponible: 10}
   ];
   
 
@@ -34,14 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
             <button onclick="sumarExtra(${prod.id}, 1)">+1</button>
             <button onclick="sumarExtra(${prod.id}, 5)">+5</button>
             <button onclick="sumarExtra(${prod.id}, -1)">-1</button>
+			<button onclick="sumarExtra(${prod.id}, -5)">-5</button>
           </div>
         </div>
         <div class="fila-controles">
           <label>Pedido:</label>
           <div class="grupo">
-            <button onclick="modificarPedido(${prod.id}, -1)">-</button>
+            <button onclick="modificarPedido(${prod.id}, -1)">-1</button>
+			<button onclick="modificarPedido(${prod.id}, -5)">-5</button>
             <span class="valor" id="pedido-${prod.id}">0</span>
-            <button onclick="modificarPedido(${prod.id}, 1)">+</button>
+            <button onclick="modificarPedido(${prod.id}, 1)">+1</button>
+			<button onclick="modificarPedido(${prod.id}, 1)">+5</button>
           </div>
         </div>
         <div class="resultado">
@@ -69,7 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizar(id);
   };
 
-  function actualizar(id) {
+  function actualizar(id) 
+  {
     const base = productos.find(p => p.id === id).disponible;
     const extra = cantidadesExtra[id];
     const pedido = cantidadesPedido[id];
@@ -78,22 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(`pedido-${id}`).textContent = pedido;
     document.getElementById(`total-${id}`).textContent = total;
 
-    actualizarTotalGeneral();
+   
   }
 
-  function actualizarTotalGeneral() {
-    let suma = 0;
-    productos.forEach(p => {
-      const total = Math.max(p.disponible + cantidadesExtra[p.id] - cantidadesPedido[p.id], 0);
-      suma += total;
-    });
-    totalFinalElement.textContent = suma;
-  }
 
   document.getElementById("cerrar-todos").addEventListener("click", () => {
     productos.forEach(p => {
       cantidadesPedido[p.id] = 0;
-      actualizar(p.id);
+
     });
   });
 
