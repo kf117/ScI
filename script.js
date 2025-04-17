@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const productos = [
-    { id: 1, nombre: "Green Crack", descripcion: "", disponible: 48 },
+    { id: 0, nombre: "Green Crack", descripcion: "", disponible: 48 },
 	
-    { id: 2, nombre: "GranDaddyPurple", descripcion: "", disponible: 12 },
-    { id: 3, nombre: "Thick punch", descripcion: "", disponible: 8 },
-    { id: 4, nombre: "White death", descripcion: "", disponible: 69 },
-	{ id: 5, nombre: "OG kush", descripcion: "", disponible: 4 },
-	{ id: 10, nombre: "Meth GranDaddyAss", descripcion: "", disponible: 64 },
-	{ id: 11, nombre: "Fruity ghost", descripcion: "", disponible: 10 },
-	{ id: 12, nombre: "Thick Smegma", descripcion: "", disponible: 10}
+    { id: 1, nombre: "GranDaddyPurple", descripcion: "", disponible: 12 },
+    { id: 2, nombre: "Thick punch", descripcion: "", disponible: 8 },
+    { id: 3, nombre: "White death", descripcion: "", disponible: 69 },
+	{ id: 4, nombre: "OG kush", descripcion: "", disponible: 4 },
+	{ id: 5, nombre: "Meth GranDaddyAss", descripcion: "", disponible: 64 },
+	{ id: 6, nombre: "Fruity ghost", descripcion: "", disponible: 10 },
+	{ id: 7, nombre: "Thick Smegma", descripcion: "", disponible: 10}
   ];
   
 
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="fila-controles">
           <label>Stock:</label>
           <div class="grupo">
-            <button onclick="sumarExtra(${prod.id}, 1)">+1</button>
-            <button onclick="sumarExtra(${prod.id}, 5)">+5</button>
-			<input class="valor" id="total-${prod.id}" value="${prod.disponible}"/>
             <button onclick="sumarExtra(${prod.id}, -1)">-1</button>
 			<button onclick="sumarExtra(${prod.id}, -5)">-5</button>
+			<input class="valor" id="total-${prod.id}" value="${prod.disponible}"/>
+			<button onclick="sumarExtra(${prod.id}, 1)">+1</button>
+            <button onclick="sumarExtra(${prod.id}, 5)">+5</button>
           </div>
         </div>
         <div class="fila-controles">
@@ -85,8 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("cerrar-todos").addEventListener("click", () => {
    productos.forEach(p => {
-	cantidadesPedido[p.id] = 0;
-	    document.getElementById(`pedido-${p.id}`).value = 0;
+		    productos[p.id].disponible = parseInt(document.getElementById(`total-${p.id}`).value, 10);
+			cantidadesPedido[p.id] = 0;
+			document.getElementById(`pedido-${p.id}`).value = 0;
+			actualizar(p.id);
+
 	});
   });
 
